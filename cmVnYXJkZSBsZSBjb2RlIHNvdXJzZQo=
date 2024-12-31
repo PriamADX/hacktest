@@ -55,7 +55,7 @@
 <body>
     <div class="login-container">
         <h2>Connexion</h2>
-        <!-- Message d'erreur générique : -->
+        <!-- Message d'erreur générique -->
         <div id="error-message" class="error-message">
             Identifiant ou mot de passe incorrect.
         </div>
@@ -81,4 +81,17 @@
                 },
                 body: JSON.stringify({ username, password })
             })
-            .then(response => response.json()
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Connexion réussie!');
+                    window.location.href = 'dashboard.html'; // Exemple de redirection
+                } else {
+                    document.getElementById('error-message').style.display = 'block';
+                }
+            })
+            .catch(err => console.error('Erreur lors de la connexion', err));
+        });
+    </script>
+</body>
+</html>
