@@ -82,4 +82,3 @@
                 body: JSON.stringify({ username, password })
             })
             .then(response => response.json()
-
