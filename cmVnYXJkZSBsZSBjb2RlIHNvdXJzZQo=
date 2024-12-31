@@ -55,13 +55,13 @@
 <body>
     <div class="login-container">
         <h2>Connexion</h2>
-        <!-- Le message d'erreur est maintenant mis à jour -->
+        <!-- Message d'erreur générique : -->
         <div id="error-message" class="error-message">
-            Convb ou userniu incorrect.
+            Identifiant ou mot de passe incorrect.
         </div>
         <form id="login-form">
-            <input type="text" id="convb" class="input-field" placeholder="Convb" required>
-            <input type="password" id="userniu" class="input-field" placeholder="Userniu" required>
+            <input type="text" id="username" class="input-field" placeholder="Identifiant" required>
+            <input type="password" id="password" class="input-field" placeholder="Mot de passe" required>
             <button type="submit" class="btn">Se connecter</button>
         </form>
     </div>
@@ -70,8 +70,8 @@
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault(); // Empêche l'envoi du formulaire
 
-            const convb = document.getElementById('convb').value;
-            const userniu = document.getElementById('userniu').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
 
             // Envoi des informations au backend pour validation
             fetch('http://localhost:3000/login', {
@@ -79,19 +79,7 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ convb, userniu })
+                body: JSON.stringify({ username, password })
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Connexion réussie!');
-                    window.location.href = 'dashboard.html'; // Exemple de redirection
-                } else {
-                    document.getElementById('error-message').style.display = 'block';
-                }
-            })
-            .catch(err => console.error('Erreur lors de la connexion', err));
-        });
-    </script>
-</body>
-</html>
+            .then(response => response.json()
+
