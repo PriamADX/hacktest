@@ -55,35 +55,42 @@
 <body>
     <div class="login-container">
         <h2>Connexion</h2>
+        <!-- Le message d'erreur est maintenant mis à jour -->
         <div id="error-message" class="error-message">
-            Identifiant ou mot de passe incorrect.
+            Convb ou userniu incorrect.
         </div>
         <form id="login-form">
-            <input type="text" id="username" class="input-field" placeholder="Identifiant" required>
-            <input type="password" id="password" class="input-field" placeholder="Mot de passe" required>
+            <input type="text" id="convb" class="input-field" placeholder="Convb" required>
+            <input type="password" id="userniu" class="input-field" placeholder="Userniu" required>
             <button type="submit" class="btn">Se connecter</button>
         </form>
     </div>
 
     <script>
-        // Identifiants et mot de passe corrects
-        const correctUsername = '10Paul';
-        const correctPassword = 'paul15@bravo';
-
-        // Fonction de validation du formulaire
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault(); // Empêche l'envoi du formulaire
 
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+            const convb = document.getElementById('convb').value;
+            const userniu = document.getElementById('userniu').value;
 
-            if (username === correctUsername && password === correctPassword) {
-                alert('Connexion réussie!');
-                // Redirige vers une autre page ou effectue une autre action ici
-                window.location.href = 'dashboard.html'; // Exemple de redirection
-            } else {
-                document.getElementById('error-message').style.display = 'block';
-            }
+            // Envoi des informations au backend pour validation
+            fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ convb, userniu })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Connexion réussie!');
+                    window.location.href = 'dashboard.html'; // Exemple de redirection
+                } else {
+                    document.getElementById('error-message').style.display = 'block';
+                }
+            })
+            .catch(err => console.error('Erreur lors de la connexion', err));
         });
     </script>
 </body>
